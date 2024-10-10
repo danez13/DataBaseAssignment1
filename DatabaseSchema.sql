@@ -14,7 +14,7 @@ CREATE TABLE Technician(
 
 CREATE TABLE Classroom(
     RoomID Varchar, 
-    BuidlingID varchar,
+    BuildingID varchar,
     RoomType char,
     Capacity numeric,
     NumPCs numeric,
@@ -35,7 +35,7 @@ CREATE TABLE Course(
     CourseID varchar,
     Year numeric,
     Semester varchar,
-    Section varchar
+    Section varchar,
     PRIMARY KEY(CourseID));
 
 CREATE TABLE InstructorCourse(
@@ -48,27 +48,27 @@ CREATE TABLE InstructorCourse(
 CREATE TABLE ClassroomSchedule(
     RoomID varchar,
     SlotDate date,
-    SlotTime time,
+    SlotStart time,
+    SlotEnd time,
     CourseID numeric,
-    PRIMARY KEY(RoomID,SlotDate, SlotTime));
+    PRIMARY KEY(RoomID,SlotDate, SlotStart, SlotEnd));
 
 CREATE TABLE Ticket(
     TicketID numeric,
     IncidentDate Date,
     IncidentTime time,
     RoomID varchar,
-    SlotTime time
+    SlotStart time,
+    SlotEnd time,
     InstructorID numeric,
     TechnicianID numeric,
     IssueType varchar,
     Description text,
     Status varchar,
     ResolutionDate date,
-    ResolutionTime time
+    ResolutionTime time,
     Notes time,
     PRIMARY KEY(TicketID),
     FOREIGN KEY(RoomID) references Classroom(RoomID),
     FOREIGN KEY(InstructorID) references Instructor(InstructorID),
     FOREIGN KEY(TechnicianID) references Technician(TechnicianID));
-
-
